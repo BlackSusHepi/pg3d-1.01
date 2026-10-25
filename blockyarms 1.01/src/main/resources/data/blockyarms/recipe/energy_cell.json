@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:redstone",
+    "minecraft:gold_nugget",
+    "minecraft:iron_nugget"
+  ],
+  "result": {
+    "id": "blockyarms:energy_cell",
+    "count": 2
+  }
+}

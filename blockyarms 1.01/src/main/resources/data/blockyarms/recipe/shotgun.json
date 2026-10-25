@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "III",
+    "WI "
+  ],
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "W": "#minecraft:planks"
+  },
+  "result": {
+    "id": "blockyarms:shotgun",
+    "count": 1
+  }
+}
