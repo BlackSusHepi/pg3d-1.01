@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "blockyarms:item/rocket_launcher"
+  }
+}
