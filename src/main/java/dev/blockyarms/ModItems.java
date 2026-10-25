@@ -2,7 +2,7 @@ package dev.blockyarms;
 
 import java.util.function.Function;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -55,7 +55,7 @@ public final class ModItems {
 	}
 
 	public static void init() {
-		ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(entries -> {
+		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(tab -> {
 			entries.accept(PISTOL);
 			entries.accept(SHOTGUN);
 			entries.accept(ROCKET_LAUNCHER);
