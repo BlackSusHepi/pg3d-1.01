@@ -1,6 +1,48 @@
 {
-  "model": {
-    "type": "minecraft:model",
-    "model": "blockyarms:item/arc_lance"
+"model": "pixel_gun:gun/prototype_geo",
+"texture":"pixel_gun:gun/uv/prototype",
+"slot":"pixel_gun:gun/slot/prototype",
+"hud":"pixel_gun:gun/hud/prototype",
+"third_person_animation": "default",
+"muzzle_flash": {
+      
+      "texture": "pixel_gun:flash/prototype_muzzle",
+      
+      "scale": 1.2
+    },
+    
+"animation": "pixel_gun:prototype",
+"use_default_animation": "rifle",
+"sounds": {
+  "head_hit": "pixel_gun:misc/hit",
+  "flesh_hit": "pixel_gun:misc/hit",
+  "kill": "pixel_gun:misc/kill",
+  "draw": "pixel_gun:misc/draw"
+   ,  "shoot_3p": "pixel_gun:ext/ext_shoot"
+
+  },
+  
+"transform": {
+"scale": {
+  // 第三人称手部
+  "thirdperson": [0.55, 0.55, 0.55],
+  // 地面实体
+  "ground": [0.6, 0.6, 0.6],
+  // 展示框
+  "fixed": [1, 1, 1]
+}
+},
+
+"offhand_show": {
+  "pos": [0, 20, 4],
+  "rotate": [0, 0, 30],
+  "scale": [0.5, 0.5, 0.5]
+},
+"hotbar_show": {
+  "0": {
+    "pos": [-4, 24, 3],
+    "rotate": [-90, -5, -90],
+    "scale": [0.5, 0.5, 0.5]
   }
+}
 }
