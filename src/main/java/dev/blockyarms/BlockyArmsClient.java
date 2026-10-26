@@ -20,8 +20,12 @@ public class BlockyArmsClient implements ClientModInitializer {
     return;
 }
 
-			if (down && player.getMainHandItem().getItem() instanceof GunItem gun) {
-				if (!wasDown || gun.isAutomatic()) {
+			// Fire if holding a gun or the Arc Lance
+			boolean isGun = player.getMainHandItem().getItem() instanceof GunItem;
+			boolean isArcLance = player.getMainHandItem().getItem() == ModItems.ARC_LANCE;
+
+			if (down && (isGun || isArcLance)) {
+				if (!wasDown || (player.getMainHandItem().getItem() instanceof GunItem gun && gun.isAutomatic())) {
 					ClientPlayNetworking.send(new FirePayload());
 				}
 			}
