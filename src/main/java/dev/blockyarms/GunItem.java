@@ -57,7 +57,7 @@ public class GunItem extends Item {
 
 		consumeAmmo(player);
 		fire(level, player);
-		player.swing(hand, true);
+		player.swing(hand, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 		player.getCooldowns().addCooldown(gun, spec.cooldownTicks());
 	}
 
