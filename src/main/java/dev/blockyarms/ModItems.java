@@ -1,15 +1,17 @@
 package dev.blockyarms;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.world.item.CreativeModeTabs;
+
 import java.util.function.Function;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public final class ModItems {
 	// ---- Ammo ----
@@ -18,7 +20,7 @@ public final class ModItems {
 	public static final Item ROCKET = register("rocket", Item::new, new Item.Properties());
 
 	// ---- Guns (edit the numbers here to rebalance) ----
-	//                                       dmg  range pellets spread cooldown boom  ammo            sound                                pitch
+	//                                     dmg  range pellets spread cooldown boom  ammo                     sound                                     pitch
 	public static final Item PISTOL = gun("pistol",
 			new GunSpec(5.0f, 60, 1, 0.0, 8, 0.0f, () -> BULLET, SoundEvents.CROSSBOW_SHOOT, 1.6f));
 
@@ -40,6 +42,28 @@ public final class ModItems {
 	public static final Item ARC_LANCE = gun("arc_lance",
 			new GunSpec(20.0f, 120, 1, 0.0, 40, 0.0f, () -> ENERGY_CELL, SoundEvents.FIREWORK_ROCKET_BLAST, 1.8f));
 
+	// ---- Custom BlockyArms Creative Tab ----
+	public static final CreativeModeTab BLOCKYARMS_TAB = Registry.register(
+			BuiltInRegistries.CREATIVE_MODE_TAB,
+			Identifier.fromNamespaceAndPath(BlockyArms.MOD_ID, "weapons"),
+			CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+					.title(Component.literal("BlockyArms"))
+					.icon(() -> new ItemStack(ARC_LANCE))
+					.displayItems((parameters, output) -> {
+						output.accept(PISTOL);
+						output.accept(SHOTGUN);
+						output.accept(ROCKET_LAUNCHER);
+						output.accept(CRIMSON_MAGNUM);
+						output.accept(BRASS_BUZZER);
+						output.accept(ARC_LANCE);
+						output.accept(ENERGY_CELL);
+						output.accept(BULLET);
+						output.accept(SHELL);
+						output.accept(ROCKET);
+					})
+					.build()
+	);
+
 	private ModItems() {
 	}
 
@@ -54,17 +78,6 @@ public final class ModItems {
 	}
 
 	public static void init() {
-		ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(entries -> {
-			entries.accept(PISTOL);
-			entries.accept(SHOTGUN);
-			entries.accept(ROCKET_LAUNCHER);
-			entries.accept(CRIMSON_MAGNUM);
-			entries.accept(BRASS_BUZZER);
-			entries.accept(ARC_LANCE);
-			entries.accept(ENERGY_CELL);
-			entries.accept(BULLET);
-			entries.accept(SHELL);
-			entries.accept(ROCKET);
-		});
+		// Custom tab registers automatically via static initialization above
 	}
 }
