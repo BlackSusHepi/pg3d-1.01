@@ -2,7 +2,7 @@ package dev.blockyarms;
 
 import java.util.function.Function;
 
-import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -55,17 +55,17 @@ public final class ModItems {
 	}
 
 	public static void init() {
-    CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(tab -> {
-        tab.accept(PISTOL);
-        tab.accept(SHOTGUN);
-        tab.accept(ROCKET_LAUNCHER);
-        tab.accept(CRIMSON_MAGNUM);
-        tab.accept(BRASS_BUZZER);
-        tab.accept(ARC_LANCE);
-        tab.accept(ENERGY_CELL);
-        tab.accept(BULLET);
-        tab.accept(SHELL);
-        tab.accept(ROCKET);
-    });
+		ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(entries -> {
+			entries.accept(PISTOL);
+			entries.accept(SHOTGUN);
+			entries.accept(ROCKET_LAUNCHER);
+			entries.accept(CRIMSON_MAGNUM);
+			entries.accept(BRASS_BUZZER);
+			entries.accept(ARC_LANCE);
+			entries.accept(ENERGY_CELL);
+			entries.accept(BULLET);
+			entries.accept(SHELL);
+			entries.accept(ROCKET);
+		});
 	}
 }

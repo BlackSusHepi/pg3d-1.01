@@ -30,28 +30,35 @@ public class GunItem extends Item {
 		this.spec = spec;
 	}
 
+	/** Right-click no longer fires; shooting is triggered by left-click (see BlockyArmsClient). */
 	@Override
 	public InteractionResult use(Level level, Player player, InteractionHand hand) {
+		return InteractionResult.PASS;
+	}
+
+	/** Fast guns keep firing while the button is held; the others fire once per click. */
+	public boolean isAutomatic() {
+		return spec.cooldownTicks() <= 4;
+	}
+
+	/** Called on the server when the player left-clicks while holding this gun. */
+	public void tryFire(ServerLevel level, Player player, InteractionHand hand) {
 		ItemStack gun = player.getItemInHand(hand);
 
 		if (player.getCooldowns().isOnCooldown(gun)) {
-			return InteractionResult.FAIL;
+			return;
 		}
 
 		if (!hasAmmo(player)) {
-			if (!level.isClientSide()) {
-				level.playSound(null, player.blockPosition(), SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS, 0.8f, 1.4f);
-			}
-			return InteractionResult.FAIL;
+			level.playSound(null, player.blockPosition(), SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS, 0.8f, 1.4f);
+			player.getCooldowns().addCooldown(gun, 10);
+			return;
 		}
 
-		if (level instanceof ServerLevel serverLevel) {
-			consumeAmmo(player);
-			fire(serverLevel, player);
-		}
-
+		consumeAmmo(player);
+		fire(level, player);
+		player.swing(hand, true);
 		player.getCooldowns().addCooldown(gun, spec.cooldownTicks());
-		return InteractionResult.SUCCESS;
 	}
 
 	private boolean hasAmmo(Player player) {
