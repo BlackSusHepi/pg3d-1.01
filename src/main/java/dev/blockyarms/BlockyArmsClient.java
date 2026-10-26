@@ -16,7 +16,7 @@ public class BlockyArmsClient implements ClientModInitializer {
 			boolean down = minecraft.options.keyAttack.isDown();
 
 			// Ignore clicks while a menu/chat is open.
-			if (player == null || minecraft.screen != null) {
+			if (player == null || minecraft.currentScreen != null) {
 				wasDown = down;
 				return;
 			}
