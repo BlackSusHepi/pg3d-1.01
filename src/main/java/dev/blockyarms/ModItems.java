@@ -55,7 +55,7 @@ public final class ModItems {
 	}
 
 	public static void init() {
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
+		ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(entries -> {
 			entries.accept(PISTOL);
 			entries.accept(SHOTGUN);
 			entries.accept(ROCKET_LAUNCHER);
